@@ -31,7 +31,13 @@ class Solution{
             solve(m,n,newx,newy,visited,ans,path);
             path.pop_back();
         }
-        
+          newx = x;
+        newy = y+1;
+        if(issafe(newx ,newy ,visited , m , n)){
+            path.push_back('R');
+            solve(m,n,newx,newy,visited,ans,path);
+            path.pop_back();
+        }
         newx = x;
         newy = y-1;
         if(issafe(newx ,newy ,visited , m , n)){
@@ -40,13 +46,7 @@ class Solution{
             path.pop_back();
         }
         
-        newx = x;
-        newy = y+1;
-        if(issafe(newx ,newy ,visited , m , n)){
-            path.push_back('R');
-            solve(m,n,newx,newy,visited,ans,path);
-            path.pop_back();
-        }
+      
         
         newx = x-1;
         newy = y;
