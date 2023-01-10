@@ -43,32 +43,30 @@ class Solution
     public:
     //Function to return the level order traversal of a tree.
     
-    vector<int> levelOrder(Node* node)
+    vector<int> levelOrder(Node* root)
     {
       //Your code here
       queue<Node*>q;
-        q.push(node);
-        vector<int>res;
-         while(!q.empty()){
-            Node * temp = q.front();
-            q.pop();
-            
-            if(temp == NULL){
-                cout<<endl;
-                if(!q.empty())
-                    q.push(NULL);
-            }
+      vector<int>ans;
+      if(!root)
+        return ans;
+      q.push(root);
+      while(!q.empty()){
+          int n = q.size();
+          for(int i=0; i<n; i++){
+               Node * temp = q.front();
+               q.pop();
+        //   if(i ==0)
+            ans.push_back(temp->data);
+     
+          if(temp->left)
+            q.push(temp->left);
+          if(temp->right)
+            q.push(temp->right);
         
-            else{
-            res.push_back(temp->data);
-                if(temp->left)
-                q.push(temp->left);
-                if(temp->right)
-                q.push(temp->right);
-            }   
-         }
-        return res;
-        
+          }
+      }
+        return ans;
     }
 };
 
