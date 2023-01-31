@@ -61,9 +61,10 @@ class Solution {
           int v = it.first;
           int wt = it.second;
 
-          if (dist[node] + wt < dist[v]) {
-            dist[v] = wt + dist[node];
-          }
+        //   if (dist[node] + wt < dist[v]) {
+        //     dist[v] = wt + dist[node];
+        //   }
+          dist[v] = min(dist[v] , wt + dist[node]);
         }
       }
 
