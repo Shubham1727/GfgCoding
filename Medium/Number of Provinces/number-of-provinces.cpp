@@ -8,34 +8,30 @@ using namespace std;
 
 class Solution {
   public:
-  void dfs (int i , vector<int> adjls[] , int vis[]){
-      vis[i]=1;
-      for(auto it: adjls[i]){
-          if(vis[it]==0){
-              dfs(it, adjls ,vis);
-          }
-      }
-  }
-  void makelist(vector<vector<int>> adj, int V , vector<int> adjls[]){
-      for(int i =0 ; i<V ; i++){
-          for(int j =0 ; j<V ;j++){
-                if(adj[i][j]==1 && i!=j){
-                    adjls[i].push_back(j);
-                    adjls[j].push_back(i);
-            }
-          }
-      }
-  }
-  int numProvinces(vector<vector<int>> adj, int V) {
+    void dfs(int vis[] , int node ,vector<int> adjlst[] ){
+        vis[node] = 1;
+        for(auto it : adjlst[node]){
+            if(!vis[it])
+                dfs(vis , it , adjlst);
+        }
+    }
+    int numProvinces(vector<vector<int>> adj, int V) {
         // code here
-        vector<int>adjls[V];
-        makelist(adj, V , adjls);
-        int vis[V]={0};
-        int count =0;
-        for(int i=0 ; i<V ; i++){
-            if(vis[i]==0){
+        vector<int> adjlst[V];
+        for(int i =0 ; i<V ; i++){
+            for(int j =0 ; j<V ; j++){
+                if(adj[i][j]== 1 && i!=j){
+                    adjlst[i].push_back(j);
+                    adjlst[j].push_back(i);
+                }
+            }
+        }
+        int vis[V] = {0};
+        int count = 0;
+        for(int i = 0 ; i<V ;i++){
+            if(!vis[i]){
                 count++;
-                dfs(i , adjls , vis);
+                dfs(vis, i , adjlst);
             }
         }
         return count;
