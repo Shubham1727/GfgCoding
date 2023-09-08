@@ -107,35 +107,31 @@ class Solution{
     {
     	// Code here
     	vector<int> result;
-    	if(root== NULL)
-    	    return result;
-    	   
-    	queue<Node*>q;
+    	if(root == NULL)    return result;
+    	
+    	queue<Node*> q;
     	q.push(root);
-    	 bool lefttoright = true;
-    	 
-    	 while(!q.empty()){
-    	     int size = q.size();
-    	     vector<int> ans(size);
-    	     
-    	     for(int i =0 ; i<size ; i++){
-    	         Node* temp = q.front();
-    	         q.pop();
-    	         
-    	         int index = lefttoright ? i:size-i-1;
-    	         ans[index] = temp->data;
-    	         
-    	         if(temp->left)
-    	            q.push(temp->left);
-    	         if(temp->right)
-    	            q.push(temp->right);
-    	            
-    	     }
-    	     lefttoright = !lefttoright;
-    	     for(auto i: ans)
-    	        result.push_back(i);
-    	 }
-    	 return result;
+    	bool leftToRight = true;
+    	while(!q.empty()){
+    	    int size = q.size();
+    	    vector<int> ans(size);
+    	    
+    	    for(int i =0 ; i<size;i++){
+    	        Node* temp = q.front();
+    	        q.pop();
+    	        
+    	        int index = leftToRight ? i : size-i-1;
+    	        
+    	        ans[index] = temp->data;
+    	        
+    	        if(temp->left) q.push(temp->left);
+    	        if(temp->right) q.push(temp->right);
+    	    }
+    	    leftToRight =!leftToRight;
+    	    
+    	    for(auto i:ans) result.push_back(i);
+    	}
+    	return result;
     }
 };
 
