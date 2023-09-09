@@ -96,31 +96,29 @@ Node* buildTree(string str)
 class Solution {
   public:
     vector <int> bottomView(Node *root) {
-       vector<int> ans;
-         if(root == NULL)
-            return ans;
-        
-        map<int, int> nodes;
-        queue<pair<Node* , int>> q;
-        q.push(make_pair(root, 0));
+        // Your Code Here
+        map<int,int> nodes;
+        queue<pair<Node* ,int>>q;
+        vector<int> result;
+        if(root==NULL)  return result;
+        q.push(make_pair(root,0));
         while(!q.empty()){
-            pair<Node* , int> temp = q.front();
+            auto temp = q.front();
             q.pop();
-            Node* frontnode = temp.first;
+            Node* firstnode = temp.first;
             int hd = temp.second;
             
-           // if(nodes.find(hd)==nodes.end())
-                nodes[hd]=frontnode->data;
-        if(frontnode->left)
-            q.push(make_pair(frontnode->left, hd-1));
-        if(frontnode->right)
-            q.push(make_pair(frontnode->right, hd+1));
+            nodes[hd] = firstnode->data;
+            
+            if(firstnode->left)     q.push(make_pair(firstnode->left , hd-1));
+            if(firstnode->right)     q.push(make_pair(firstnode->right , hd+1));
+            
         }
         
-        for(auto i : nodes){
-                ans.push_back(i.second);
-            }
-        return ans;
+        for(auto i: nodes){
+            result .push_back(i.second);
+        }
+        return result;
     }
 };
 
